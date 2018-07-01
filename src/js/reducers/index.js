@@ -13,7 +13,7 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_ARTICLE:
         	return {
         		...state,
-        		articles: [...state.articles.slice(0, action.payload), ...state.articles.slice(action.payload + 1)]
+        		articles: []
         	}
         default:
             return state;

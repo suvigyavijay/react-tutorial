@@ -8,7 +8,6 @@ export const addArticle = article => ({
     payload: article
 });
 
-export const deleteArticle = articleIndex => ({
-	type: 'DELETE_ARTICLE',
-	payload: articleIndex
+export const deleteArticle = () => ({
+	type: 'DELETE_ARTICLE'
 })

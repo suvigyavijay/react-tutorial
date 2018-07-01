@@ -5,7 +5,8 @@ import {addArticle, deleteArticle} from '../actions/index';
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addArticle: article => dispatch(addArticle(article))
+		addArticle: article => dispatch(addArticle(article)),
+		deleteArticle: () => dispatch(deleteArticle())
 	};
 };
 
@@ -19,6 +20,7 @@ class ConnectedForm extends React.Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleReset = this.handleReset.bind(this);
 	}
 
 	handleChange(event) {
@@ -35,15 +37,22 @@ class ConnectedForm extends React.Component {
 		this.setState({title: ''})
 	}
 
+	handleReset(event) {
+		event.preventDefault();
+		this.props.deleteArticle();
+		this.setState({title: ''})
+	}
+
 	render() {
 		const {title} = this.state;
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={this.handleSubmit} onReset={this.handleReset}>
 				<div className='form-group'>
 					<label htmlFor='title'>Title</label>
 					<input type="text" className="form-control" id="title" value={title} onChange={this.handleChange} />
 				</div>
-				<button type="submit" className="btn btn-success btn-lg">SAVE</button>
+				<button type="submit" className="btn btn-success btn-lg">SAVE</button>&nbsp;
+				<button type="reset" className="btn btn-error btn-lg">RESET</button>
 			</form>
 		);
 	}
